@@ -1,0 +1,37 @@
+color rosa = color(238,149,221);
+color negro = color(0,0,0);
+color aux;
+int diametro;
+float n,x,y,m;
+void setup()
+{
+  size(450, 450);
+  smooth();
+  background(255);
+  noStroke();
+  diametro = 20;
+  n=0;
+  fill(negro);
+  ellipse(450/2,450/2,400,400);
+   pushMatrix();
+}
+
+void draw(){
+  translate(width/2, height/2);
+  rotate(radians(n*1.5));
+  for (int i = 0; i < 360; i+=diametro) {
+    x = pow(sin(radians(i+n)), 3)*200;
+    y = pow(cos(radians(i+n)), 3)*x;
+    m = map(dist(x, y, 0, 0), 0, 200, 1, 10);
+    fill(rosa);
+    ellipse(x, y, m, m);
+  }
+  n += 0.5;
+}
+void mousePressed(){
+ aux = rosa;
+ rosa = negro;
+ negro = aux;
+ popMatrix();
+ setup();
+}
